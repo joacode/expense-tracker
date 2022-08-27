@@ -1,21 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
+  reactStrictMode: true,
 }
 
-/* eslint-disable @typescript-eslint/no-var-requires */
-
-const withPWA = require('next-pwa')
+const withPWA = require("next-pwa");
 
 module.exports = withPWA({
-    pwa: {
-        dest: 'public',
-        register: true,
-        skipWaiting: true,
-    },
-    publicRuntimeConfig: {
-        apiBaseUrl: process.env.MONGO_URI,
-    },
-})
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+  },
+});
 
 module.exports = nextConfig
