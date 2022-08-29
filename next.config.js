@@ -13,9 +13,6 @@ module.exports = withPWA({
         register: true,
         skipWaiting: true,
     },
-    publicRuntimeConfig: {
-        apiBaseUrl: process.env.MONGO_URI,
-    },
 })
 
 module.exports = nextConfig

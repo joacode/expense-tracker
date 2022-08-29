@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import App from 'next/app'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import '../styles/globals.css'
@@ -16,4 +17,12 @@ export default function MyApp(props): ReactElement {
             <Component {...pageProps} />
         </>
     )
+}
+
+MyApp.getInitialProps = async (ctx): Promise<Record<string, string>> => {
+    const pageProps = await App.getInitialProps(ctx)
+
+    return {
+        ...pageProps,
+    }
 }
