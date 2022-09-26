@@ -30,7 +30,7 @@ interface Props {
     edit?: boolean
 }
 
-const Detail: FC<Props> = ({ edit = false }): ReactElement => {
+const RecordDetail: FC<Props> = ({ edit = false }): ReactElement => {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [record, setRecord] = useState<RecordInterface>(null)
@@ -174,8 +174,8 @@ const Detail: FC<Props> = ({ edit = false }): ReactElement => {
     )
 }
 
-export default Detail
+export default RecordDetail
 
-Detail.defaultProps = {
+RecordDetail.defaultProps = {
     edit: false,
 }
