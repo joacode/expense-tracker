@@ -1,0 +1,11 @@
+{
+  "/[id]/edit": "pages/[id]/edit.js",
+  "/[id]": "pages/[id].js",
+  "/api/records": "pages/api/records.js",
+  "/api/records/[id]": "pages/api/records/[id].js",
+  "/": "pages/index.js",
+  "/records": "pages/records.js",
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js"
+}
