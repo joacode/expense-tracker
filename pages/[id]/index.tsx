@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import { NextPage } from 'next'
 import Layout from '../../src/components/UI/Layout/Layout'
 import RecordDetail from '../../src/components/RecordDetail'

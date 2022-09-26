@@ -13,8 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ pages_records),
-  "records": () => (/* binding */ records)
+  "default": () => (/* binding */ records)
 });
 
 // EXTERNAL MODULE: external "react/jsx-runtime"
@@ -515,12 +514,12 @@ const RecordsTable = ()=>{
 
 
 
-const records = ()=>{
+const Records = ()=>{
     return /*#__PURE__*/ jsx_runtime_.jsx(Layout/* default */.Z, {
         children: /*#__PURE__*/ jsx_runtime_.jsx(components_RecordsTable, {})
     });
 };
-/* harmony default export */ const pages_records = (records);
+/* harmony default export */ const records = (Records);
 
 
 /***/ }),
@@ -602,7 +601,7 @@ module.exports = require("styled-components");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [642,225], () => (__webpack_exec__(460)));
+var __webpack_exports__ = __webpack_require__.X(0, [642,14], () => (__webpack_exec__(460)));
 module.exports = __webpack_exports__;
 
 })();

@@ -83,7 +83,10 @@ const Header = ()=>{
 };
 /* harmony default export */ const Layout_Header = (Header);
 
+// EXTERNAL MODULE: ./src/components/UI/Layout/Loading.tsx
+var Loading = __webpack_require__(362);
 ;// CONCATENATED MODULE: ./src/components/UI/Layout/Layout.tsx
+
 
 
 
@@ -97,7 +100,10 @@ const StyledContainer = external_styled_components_default()((Container_default(
     max-width: 100%;
     background: ${theme.colors.green};
 `;
-const Layout = ({ children  })=>{
+const Layout = ({ children , loading  })=>{
+    if (loading) {
+        return /*#__PURE__*/ jsx_runtime_.jsx(Loading/* Loading */.g, {});
+    }
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(StyledContainer, {
         children: [
             /*#__PURE__*/ jsx_runtime_.jsx(Layout_Header, {}),
@@ -109,9 +115,40 @@ const Layout = ({ children  })=>{
     });
 };
 Layout.defaultProps = {
-    children: undefined
+    children: undefined,
+    loading: false
 };
 /* harmony default export */ const Layout_Layout = (Layout);
+
+
+/***/ }),
+
+/***/ 362:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "g": () => (/* binding */ Loading)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(689);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var rsuite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(210);
+/* harmony import */ var rsuite__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(rsuite__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const Loading = ({ label  })=>{
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(rsuite__WEBPACK_IMPORTED_MODULE_2__.Loader, {
+        center: true,
+        content: label,
+        vertical: true,
+        size: "lg"
+    });
+};
+Loading.defaultProps = {
+    label: "Loading..."
+};
 
 
 /***/ })

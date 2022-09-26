@@ -9,7 +9,7 @@ exports.modules = {
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "Z": () => (/* binding */ RecordDetail)
+  "Z": () => (/* binding */ components_RecordDetail)
 });
 
 // EXTERNAL MODULE: external "react/jsx-runtime"
@@ -83,7 +83,7 @@ const Container = (external_styled_components_default()).div`
     justify-content: space-between;
     display: flex;
 `;
-const Detail = ({ edit =false  })=>{
+const RecordDetail = ({ edit =false  })=>{
     const router = (0,router_.useRouter)();
     const { 0: loading , 1: setLoading  } = (0,external_react_.useState)(false);
     const { 0: record , 1: setRecord  } = (0,external_react_.useState)(null);
@@ -214,8 +214,8 @@ const Detail = ({ edit =false  })=>{
         })
     });
 };
-/* harmony default export */ const RecordDetail = (Detail);
-Detail.defaultProps = {
+/* harmony default export */ const components_RecordDetail = (RecordDetail);
+RecordDetail.defaultProps = {
     edit: false
 };
 

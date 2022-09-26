@@ -1,13 +1,15 @@
 import { useRouter } from 'next/router'
-import React, { ReactElement, useEffect } from 'react'
-import Layout from 'src/components/UI/Layout/Layout'
+import React, { useEffect } from 'react'
+import Layout from '../src/components/UI/Layout/Layout'
 
-export default function Home(): ReactElement {
+function HomePage(): JSX.Element {
     const router = useRouter()
 
     useEffect(() => {
         router.push('/records')
-    }, [])
+    }, [router])
 
-    return <Layout />
+    return <Layout loading />
 }
+
+export default HomePage

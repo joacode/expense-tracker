@@ -10,7 +10,7 @@ exports.modules = {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Home)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
@@ -18,18 +18,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var src_components_UI_Layout_Layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(642);
+/* harmony import */ var _src_components_UI_Layout_Layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(642);
 
 
 
 
-function Home() {
+function HomePage() {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_1__.useRouter)();
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
         router.push("/records");
-    }, []);
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(src_components_UI_Layout_Layout__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {});
-};
+    }, [
+        router
+    ]);
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_src_components_UI_Layout_Layout__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
+        loading: true
+    });
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HomePage);
 
 
 /***/ }),
@@ -52,6 +57,13 @@ module.exports = require("react");
 /***/ ((module) => {
 
 module.exports = require("react/jsx-runtime");
+
+/***/ }),
+
+/***/ 210:
+/***/ ((module) => {
+
+module.exports = require("rsuite");
 
 /***/ }),
 
