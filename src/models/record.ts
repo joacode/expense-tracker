@@ -7,6 +7,20 @@ export interface RecordInterface {
     date?: string
 }
 
+export interface RecordUpdateRequest {
+    _id: number
+    title?: string
+    detail?: string
+    amount?: number
+    date?: string
+}
+
+export interface RecordFilter {
+    title?: string
+    amount?: number
+    date?: string
+}
+
 const recordSchema = new Schema<RecordInterface>({
     title: { type: String, required: true },
     detail: String,
