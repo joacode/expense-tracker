@@ -6,6 +6,7 @@ const nextConfig = {
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const withPWA = require('next-pwa')
+const path = require('path')
 
 module.exports = withPWA({
     pwa: {
@@ -13,6 +14,7 @@ module.exports = withPWA({
         register: true,
         skipWaiting: true,
     },
+    path,
 })
 
 module.exports = nextConfig
