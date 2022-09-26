@@ -1,8 +1,9 @@
 import React, { ReactElement } from 'react'
 import Layout from 'src/components/UI/Layout/Layout'
 import RecordsTable from 'src/components/RecordsTable'
+import { NextPage } from 'next'
 
-export const records = (): ReactElement => {
+const records: NextPage = (): ReactElement => {
     return (
         <Layout>
             <RecordsTable />
