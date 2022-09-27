@@ -26,6 +26,15 @@ const Container = styled.div`
     display: flex;
 `
 
+const ButtonContainer = styled.div`
+    margin: 20px;
+    padding: 20px;
+    justify-content: space-between;
+    display: flex;
+    borderbottom: 'none';
+    //justifyContent: 'center',
+`
+
 interface Props {
     edit?: boolean
 }
@@ -39,6 +48,12 @@ const RecordDetail: FC<Props> = ({ edit = false }): ReactElement => {
         // @ts-ignore
         // eslint-disable-next-line no-underscore-dangle
         router.push(`/${record._id}/edit`)
+    }
+
+    const onCancel = (): void => {
+        // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
+        router.push(`/${record._id}`)
     }
 
     const titleChange = (value: string): void => {
@@ -150,23 +165,22 @@ const RecordDetail: FC<Props> = ({ edit = false }): ReactElement => {
                                 </ItemDetail>
                             )}
                         </Container>
-                        {edit && (
-                            <Container
-                                style={{
-                                    borderBottom: 'none',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <Button
-                                    appearance="primary"
-                                    onClick={(e: React.MouseEvent): void =>
-                                        checkAndSubmit(e)
-                                    }
-                                >
-                                    Submit
+                        <ButtonContainer>
+                            {edit && (
+                                <Button appearance="ghost" onClick={onCancel}>
+                                    Cancel
                                 </Button>
-                            </Container>
-                        )}
+                            )}
+                            <Button
+                                appearance="primary"
+                                color={edit ? 'blue' : 'red'}
+                                onClick={(e: React.MouseEvent): void =>
+                                    checkAndSubmit(e)
+                                }
+                            >
+                                {edit ? 'Submit' : 'Delete'}
+                            </Button>
+                        </ButtonContainer>
                     </>
                 )}
             </Grid>
