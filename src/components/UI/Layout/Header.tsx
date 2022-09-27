@@ -36,9 +36,7 @@ const Header = (): ReactElement => {
                 Home
             </HeaderItem>
             <HeaderItem
-                onClick={(e: React.MouseEvent): void =>
-                    handleClick(e, 'records')
-                }
+                onClick={(e: React.MouseEvent): void => handleClick(e, 'about')}
             >
                 About
             </HeaderItem>

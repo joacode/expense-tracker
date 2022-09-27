@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC, ReactElement, ReactNode } from 'react'
 import styled from 'styled-components'
 
 interface ItemDetailProps {
@@ -11,7 +11,7 @@ const Container = styled.span<ItemDetailProps>`
 `
 
 interface Props {
-    children: string | number | string[]
+    children: ReactNode
     bolder?: boolean
 }
 

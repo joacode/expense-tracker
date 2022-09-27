@@ -1,9 +1,12 @@
+/* eslint-disable */
 import React, { FC, ReactElement, useEffect, useState } from 'react'
 import { Grid, Message, Table, toaster } from 'rsuite'
 import { RecordInterface } from 'src/models/record'
 import { RecordsService } from 'src/services/recordsService'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
+import VisibleIcon from '@rsuite/icons/Visible'
+import CloseIcon from '@rsuite/icons/Close'
 import { Loading } from './UI/Layout/Loading'
 import RecordsActions from './UI/RecordsActions'
 import DeleteRecordModal from './Modals/DeleteRecordModal'
@@ -75,7 +78,7 @@ const RecordsTable: FC = (): ReactElement => {
             <Grid style={{ width: 'fit-content' }}>
                 <Table
                     autoHeight
-                    width={600}
+                    width={605}
                     data={filteredRecords}
                     onRowClick={(rowData): void => {
                         // eslint-disable-next-line no-underscore-dangle
@@ -97,26 +100,31 @@ const RecordsTable: FC = (): ReactElement => {
                         <Cell dataKey="amount" />
                     </Column>
 
-                    <Column width={110}>
+                    <Column width={135}>
                         <HeaderCell>Date</HeaderCell>
                         <Cell dataKey="date">
                             {(rowData): ReactElement => {
                                 return (
                                     rowData?.date?.slice(
                                         0,
-                                        rowData?.date.indexOf('T')
+                                        rowData?.date.indexOf(':') - 3
                                     ) || ''
                                 )
                             }}
                         </Cell>
                     </Column>
 
-                    <Column width={80}>
+                    <Column width={70}>
                         <HeaderCell>Actions</HeaderCell>
                         <Cell>
                             {(rowData): ReactElement => (
                                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-                                <>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'space-around',
+                                    }}
+                                >
                                     {' '}
                                     <ActionContainer
                                         onClick={(
@@ -127,7 +135,7 @@ const RecordsTable: FC = (): ReactElement => {
                                             onRowClick(rowData._id, true)
                                         }}
                                     >
-                                        Edit
+                                        <VisibleIcon />
                                     </ActionContainer>
                                     <ActionContainer
                                         onClick={(
@@ -139,9 +147,9 @@ const RecordsTable: FC = (): ReactElement => {
                                             setShowDeleteRecordModal(true)
                                         }}
                                     >
-                                        Delete
+                                        <CloseIcon />
                                     </ActionContainer>
-                                </>
+                                </div>
                             )}
                         </Cell>
                     </Column>
