@@ -3,7 +3,7 @@ import Layout from 'src/components/UI/Layout/Layout'
 import RecordsTable from 'src/components/RecordsTable'
 import { NextPage } from 'next'
 
-const records: NextPage = (): ReactElement => {
+const Records: NextPage = (): ReactElement => {
     return (
         <Layout>
             <RecordsTable />
@@ -11,4 +11,4 @@ const records: NextPage = (): ReactElement => {
     )
 }
 
-export default records
+export default Records
