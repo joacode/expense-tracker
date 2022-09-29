@@ -1,43 +1,40 @@
-import React, { FC, ReactElement } from 'react'
+import React, { CSSProperties, FC, ReactElement, useContext } from 'react'
 import styled from 'styled-components'
 import { Input as RSInput } from 'rsuite'
 import ItemDetail from './ItemDetail'
+import AppContext from '../../contexts/AppContext'
+import { ItemContainer } from '../RecordDetail'
 
 const Input = styled(RSInput)`
-    width: auto;
+    width: 100%;
     display: inline-block;
 `
 
-const Container = styled.div`
-    margin: 20px;
-    padding: 20px;
-    border-bottom: 0.5px solid #575a5b4d;
-    justify-content: space-between;
-    display: flex;
-`
-
-interface Props {
+interface InputItemProps {
     label: string
     onChange: (value: string | number) => void
     defaultValue?: string | number
     edit: boolean
+    style?: CSSProperties
 }
 
-const InputItem: FC<Props> = ({
+const InputItem: FC<InputItemProps> = ({
     label,
     onChange,
     defaultValue,
     edit,
+    style,
 }): ReactElement => {
+    const { maxResolutionQuery } = useContext(AppContext)
     return (
-        <Container>
+        <ItemContainer maxWidth={maxResolutionQuery} style={style}>
             <ItemDetail bolder>{label}</ItemDetail>
             {edit ? (
                 <Input defaultValue={defaultValue} onChange={onChange} />
             ) : (
                 <ItemDetail>{defaultValue}</ItemDetail>
             )}
-        </Container>
+        </ItemContainer>
     )
 }
 
@@ -45,4 +42,5 @@ export default InputItem
 
 InputItem.defaultProps = {
     defaultValue: '',
+    style: null,
 }

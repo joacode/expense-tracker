@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from 'react'
+import React, { FC, ReactElement, useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import RecordsFilter from './RecordsFilter'
 import Button from './Button'
@@ -7,6 +7,8 @@ import AddRecordModal from '../Modals/AddRecordModal'
 import { RecordsService } from '../../services/recordsService'
 import { addRecordMessage } from './message'
 import { RecordInterface } from '../../models/record'
+import AppContext from '../../contexts/AppContext'
+import FilterPopUp from './FilterPopUp'
 
 interface Props {
     records: RecordInterface[]
@@ -23,6 +25,13 @@ const RecordsActions: FC<Props> = ({
     const [record, setRecord] = useState<RecordInterface>(null)
     const [showAddRecordModal, setShowAddRecordModal] = useState(false)
 
+    const { windowDimensions, maxResolutionQuery } = useContext(AppContext)
+
+    const parsedMaxResolutionQuery = parseInt(
+        maxResolutionQuery.slice(0, maxResolutionQuery.indexOf('p')),
+        10
+    )
+
     const checkAndSubmit = (): void => {
         if (record.title !== '' && !Number.isNaN(record.amount)) {
             RecordsService.create(record)
@@ -36,13 +45,30 @@ const RecordsActions: FC<Props> = ({
 
     return (
         <Box>
-            <RecordsFilter
-                records={records}
-                filteredRecords={filteredRecords}
-                setFilteredRecords={setFilteredRecords}
-            />
+            {windowDimensions.width > parsedMaxResolutionQuery ? (
+                <RecordsFilter
+                    records={records}
+                    filteredRecords={filteredRecords}
+                    setFilteredRecords={setFilteredRecords}
+                />
+            ) : (
+                <FilterPopUp
+                    records={records}
+                    filteredRecords={filteredRecords}
+                    setFilteredRecords={setFilteredRecords}
+                />
+            )}
             <Button
                 appearance="primary"
+                style={{
+                    margin: '10px',
+                    width: `${
+                        windowDimensions.width < parsedMaxResolutionQuery
+                            ? '-webkit-fill-available'
+                            : 98
+                    }`,
+                    height: 36,
+                }}
                 onClick={(): void => setShowAddRecordModal(true)}
             >
                 Add Record

@@ -7,6 +7,7 @@ interface ItemDetailProps {
 
 const Container = styled.span<ItemDetailProps>`
     font-weight: ${(props): string => (props.bolder ? 'bolder' : 'normal')};
+    word-wrap: break-word;
     margin: 10px;
 `
 

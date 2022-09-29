@@ -1,32 +1,27 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC, ReactElement, useContext } from 'react'
 import { DatePicker, Modal } from 'rsuite'
-import styled from 'styled-components'
 import Button from '../UI/Button'
 import ItemDetail from '../UI/ItemDetail'
 import InputItem from '../UI/InputItem'
 import { RecordInterface } from '../../models/record'
+import AppContext from '../../contexts/AppContext'
+import { ItemContainer } from '../RecordDetail'
 
-const Container = styled.div`
-    margin: 20px;
-    padding: 20px;
-    border-bottom: 0.5px solid #575a5b4d;
-    justify-content: space-between;
-    display: flex;
-`
-
-interface Props {
+interface AddRecordModalProps {
     open: boolean
     onClose: () => void
     onSubmit: () => void
     setRecord: (prevState: (prevState) => RecordInterface) => void
 }
 
-const AddRecordModal: FC<Props> = ({
+const AddRecordModal: FC<AddRecordModalProps> = ({
     open,
     onClose,
     onSubmit,
     setRecord,
 }): ReactElement => {
+    const { maxResolutionQuery } = useContext(AppContext)
+
     const titleChange = (value: string): void => {
         setRecord(prevState => ({
             ...prevState,
@@ -62,19 +57,24 @@ const AddRecordModal: FC<Props> = ({
             </Modal.Header>
             <Modal.Body>
                 <>
-                    <InputItem label="Title:" onChange={titleChange} edit />
+                    <InputItem
+                        style={{ marginTop: 0 }}
+                        label="Title:"
+                        onChange={titleChange}
+                        edit
+                    />
                     <InputItem label="Detail:" onChange={detailChange} edit />
                     <InputItem label="Amount:" onChange={amountChange} edit />
-                    <Container>
+                    <ItemContainer maxWidth={maxResolutionQuery}>
                         <ItemDetail bolder>Date:</ItemDetail>
                         <DatePicker
                             placeholder="Select Date"
-                            style={{ width: 170 }}
                             onSelect={dateChange}
                             oneTap
                             format="yyyy-MM-dd"
+                            style={{ width: '100%' }}
                         />
-                    </Container>
+                    </ItemContainer>
                 </>
             </Modal.Body>
             <Modal.Footer>

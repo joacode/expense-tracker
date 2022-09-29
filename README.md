@@ -1,6 +1,14 @@
-This project was born as a necessity to keep track of the expenses. My girlfriend and I needed an app where we could
-record
-every transaction we made.
+#### This project was born from a necessity to keep track of shared expenses my girlfriend and I had when we first moved in together.
+
+#### We tried a lot of apps from the stores but all of them did split the expenses. That was not useful for us as we only needed to keep an eye on the expenditure.
+
+#### It seemed the only way to solve it was to code it, soooooo
+
+ ```bash
+   const welcomeMessage = () => {
+        return 'Here it is... Enjoy!'
+    }
+```
 
 Welcome to my [Next.js](https://nextjs.org/) project bootstrapped
 with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)!
@@ -32,5 +40,5 @@ are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) ins
 
 ## Deployed on Vercel
 
-There is a live version of the app in [Financial Tool - Vercel](https://financial-tool-joacode.vercel.app/).
+There is a live version of the app in [Expense Tracker - Vercel](https://https://joacode-expense-tracker.vercel.app/).
 For the database the app is using [MongoDB](https://www.mongodb.com/).
