@@ -14,6 +14,7 @@ import DeleteRecordModal from './Modals/DeleteRecordModal'
 import {addRecordMessage} from './UI/message'
 import {dateParser} from "../../utils/dateParser";
 import AppContext from "../contexts/AppContext";
+import RecordsSummary from './UI/RecordsSummary'
 
 interface GridProps {
     maxWidth?: string
@@ -48,14 +49,6 @@ const RecordsTable: FC = (): ReactElement => {
     const [deleteId, setDeleteId] = useState<number>(null)
 
     const {maxResolutionQuery, windowDimensions} = useContext(AppContext)
-
-    const parsedMaxResolutionQuery = parseInt(
-        maxResolutionQuery.slice(
-            0,
-            maxResolutionQuery.indexOf('p')
-        ),
-        10
-    )
 
     const onRowClick = (id: number, edit?: boolean): void => {
         if (edit) {
@@ -102,12 +95,15 @@ const RecordsTable: FC = (): ReactElement => {
                 filteredRecords={filteredRecords}
                 setFilteredRecords={setFilteredRecords}
             />
-            <Grid maxWidth={maxResolutionQuery}>
+            <RecordsSummary
+                records={records}
+            />
+            <Grid maxWidth={`${maxResolutionQuery}px`}>
                 <Table
                     virtualized
                     wordWrap
                     autoHeight
-                    width={windowDimensions.width < parsedMaxResolutionQuery ? windowDimensions.width : parsedMaxResolutionQuery}
+                    width={windowDimensions.width < maxResolutionQuery ? windowDimensions.width : maxResolutionQuery}
                     data={filteredRecords}
                     onRowClick={(rowData): void => {
                         // eslint-disable-next-line no-underscore-dangle
@@ -127,6 +123,11 @@ const RecordsTable: FC = (): ReactElement => {
                     <Column width={100}>
                         <HeaderCell>Amount</HeaderCell>
                         <Cell dataKey="amount"/>
+                    </Column>
+
+                    <Column width={60}>
+                        <HeaderCell>Type</HeaderCell>
+                        <Cell dataKey="type"/>
                     </Column>
 
                     <Column width={90}>

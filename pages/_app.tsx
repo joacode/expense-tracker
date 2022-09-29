@@ -30,7 +30,7 @@ export default function MyApp(props): ReactElement {
             </Head>
             <AppContext.Provider
                 value={{
-                    maxResolutionQuery: '540px',
+                    maxResolutionQuery: 600,
                     windowDimensions,
                 }}
             >

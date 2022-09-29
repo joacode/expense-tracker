@@ -96,11 +96,6 @@ const RecordsFilter: FC<RecordsFilterProps> = ({
 
     const { windowDimensions, maxResolutionQuery } = useContext(AppContext)
 
-    const parsedMaxResolutionQuery = parseInt(
-        maxResolutionQuery.slice(0, maxResolutionQuery.indexOf('p')),
-        10
-    )
-
     const onChangeTitleFilter = (value: string): void => {
         setFilters(prevState => ({ ...prevState, title: value }))
     }
@@ -143,18 +138,18 @@ const RecordsFilter: FC<RecordsFilterProps> = ({
     }
 
     return (
-        <FilterContainer maxWidth={maxResolutionQuery} popUp={popUp}>
+        <FilterContainer maxWidth={`${maxResolutionQuery}px`} popUp={popUp}>
             <Container>
                 <span>Title: </span>
                 <Input
-                    maxWidth={maxResolutionQuery}
+                    maxWidth={`${maxResolutionQuery}px`}
                     onChange={onChangeTitleFilter}
                 />
             </Container>
             <Container>
                 <span>Amount: </span>
                 <Input
-                    maxWidth={maxResolutionQuery}
+                    maxWidth={`${maxResolutionQuery}px`}
                     onChange={onChangeAmountFilter}
                 />
             </Container>
@@ -165,7 +160,7 @@ const RecordsFilter: FC<RecordsFilterProps> = ({
                     oneTap
                     format="yyyy-MM-dd"
                     placeholder="Select Date:"
-                    maxWidth={maxResolutionQuery}
+                    maxWidth={`${maxResolutionQuery}px`}
                 />
             </Container>
             <Button
@@ -173,7 +168,7 @@ const RecordsFilter: FC<RecordsFilterProps> = ({
                 style={{
                     margin: '10px',
                     width: `${
-                        windowDimensions.width < parsedMaxResolutionQuery
+                        windowDimensions.width < maxResolutionQuery
                             ? '-webkit-fill-available'
                             : 55
                     }`,
@@ -188,7 +183,7 @@ const RecordsFilter: FC<RecordsFilterProps> = ({
                 style={{
                     margin: '10px',
                     width: `${
-                        windowDimensions.width < parsedMaxResolutionQuery
+                        windowDimensions.width < maxResolutionQuery
                             ? '-webkit-fill-available'
                             : 100
                     }`,

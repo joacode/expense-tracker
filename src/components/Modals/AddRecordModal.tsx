@@ -43,6 +43,13 @@ const AddRecordModal: FC<AddRecordModalProps> = ({
         }))
     }
 
+    const typeChange = (value: string): void => {
+        setRecord(prevState => ({
+            ...prevState,
+            type: value,
+        }))
+    }
+
     const dateChange = (date: Date): void => {
         setRecord(prevState => ({
             ...prevState,
@@ -58,14 +65,22 @@ const AddRecordModal: FC<AddRecordModalProps> = ({
             <Modal.Body>
                 <>
                     <InputItem
-                        style={{ marginTop: 0 }}
+                        style={{ marginTop: 0, paddingTop: 0 }}
                         label="Title:"
                         onChange={titleChange}
                         edit
                     />
                     <InputItem label="Detail:" onChange={detailChange} edit />
                     <InputItem label="Amount:" onChange={amountChange} edit />
-                    <ItemContainer maxWidth={maxResolutionQuery}>
+                    <InputItem label="Type:" onChange={typeChange} edit />
+                    <ItemContainer
+                        maxWidth={`${maxResolutionQuery}px`}
+                        style={{
+                            marginBottom: 0,
+                            paddingBottom: 0,
+                            borderBottom: 'none',
+                        }}
+                    >
                         <ItemDetail bolder>Date:</ItemDetail>
                         <DatePicker
                             placeholder="Select Date"

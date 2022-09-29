@@ -6,12 +6,12 @@ export interface WindowDimensions {
 }
 
 export interface AppContextType {
-    maxResolutionQuery: string
+    maxResolutionQuery: number
     windowDimensions: WindowDimensions
 }
 
 const AppContext = createContext<AppContextType>({
-    maxResolutionQuery: '540px',
+    maxResolutionQuery: 600,
     windowDimensions: {
         width: 320,
         height: 669,

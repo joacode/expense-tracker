@@ -42,7 +42,7 @@ const Button: FC<ButtonProps> = ({
             style={style}
             color={color}
             onClick={onClick}
-            maxWidth={maxResolutionQuery}
+            maxWidth={`${maxResolutionQuery}px`}
         >
             {children}
         </StyledButton>

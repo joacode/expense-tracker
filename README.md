@@ -1,6 +1,6 @@
 #### This project was born from a necessity to keep track of shared expenses my girlfriend and I had when we first moved in together.
 
-#### We tried a lot of apps from the stores but all of them did split the expenses. That was not useful for us as we only needed to keep an eye on the expenditure.
+#### We tried a lot of apps but none of them fit our use case since we only wanted to keep track of combined expenses and not split the total.
 
 #### It seemed the only way to solve it was to code it, soooooo
 

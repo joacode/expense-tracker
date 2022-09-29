@@ -27,11 +27,6 @@ const RecordsActions: FC<Props> = ({
 
     const { windowDimensions, maxResolutionQuery } = useContext(AppContext)
 
-    const parsedMaxResolutionQuery = parseInt(
-        maxResolutionQuery.slice(0, maxResolutionQuery.indexOf('p')),
-        10
-    )
-
     const checkAndSubmit = (): void => {
         if (record.title !== '' && !Number.isNaN(record.amount)) {
             RecordsService.create(record)
@@ -45,7 +40,7 @@ const RecordsActions: FC<Props> = ({
 
     return (
         <Box>
-            {windowDimensions.width > parsedMaxResolutionQuery ? (
+            {windowDimensions.width > maxResolutionQuery ? (
                 <RecordsFilter
                     records={records}
                     filteredRecords={filteredRecords}
@@ -63,7 +58,7 @@ const RecordsActions: FC<Props> = ({
                 style={{
                     margin: '10px',
                     width: `${
-                        windowDimensions.width < parsedMaxResolutionQuery
+                        windowDimensions.width < maxResolutionQuery
                             ? '-webkit-fill-available'
                             : 98
                     }`,

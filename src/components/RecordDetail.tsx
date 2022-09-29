@@ -102,6 +102,13 @@ const RecordDetail: FC<RecordDetailProps> = ({
         }))
     }
 
+    const typeChange = (value: string): void => {
+        setRecord(prevState => ({
+            ...prevState,
+            type: value,
+        }))
+    }
+
     const dateChange = (date: Date): void => {
         setRecord(prevState => ({
             ...prevState,
@@ -137,7 +144,7 @@ const RecordDetail: FC<RecordDetailProps> = ({
 
     return (
         <Box>
-            <Grid maxWidth={maxResolutionQuery}>
+            <Grid maxWidth={`${maxResolutionQuery}px`}>
                 <Title>
                     <>
                         {record?.title}
@@ -170,7 +177,13 @@ const RecordDetail: FC<RecordDetailProps> = ({
                             defaultValue={record.amount}
                             edit={edit}
                         />
-                        <ItemContainer maxWidth={maxResolutionQuery}>
+                        <InputItem
+                            label="Type:"
+                            onChange={typeChange}
+                            defaultValue={record.type}
+                            edit={edit}
+                        />
+                        <ItemContainer maxWidth={`${maxResolutionQuery}px`}>
                             <ItemDetail bolder>Date:</ItemDetail>
                             {edit ? (
                                 <DatePicker
@@ -187,7 +200,7 @@ const RecordDetail: FC<RecordDetailProps> = ({
                                 </ItemDetail>
                             )}
                         </ItemContainer>
-                        <ButtonContainer maxWidth={maxResolutionQuery}>
+                        <ButtonContainer maxWidth={`${maxResolutionQuery}px`}>
                             {edit && (
                                 <Button appearance="ghost" onClick={onCancel}>
                                     Cancel

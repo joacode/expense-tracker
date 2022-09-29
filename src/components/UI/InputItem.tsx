@@ -27,7 +27,7 @@ const InputItem: FC<InputItemProps> = ({
 }): ReactElement => {
     const { maxResolutionQuery } = useContext(AppContext)
     return (
-        <ItemContainer maxWidth={maxResolutionQuery} style={style}>
+        <ItemContainer maxWidth={`${maxResolutionQuery}px`} style={style}>
             <ItemDetail bolder>{label}</ItemDetail>
             {edit ? (
                 <Input defaultValue={defaultValue} onChange={onChange} />
