@@ -1,23 +1,41 @@
 /* eslint-disable */
-import React, { FC, ReactElement, useEffect, useState } from 'react'
-import { Grid, Message, Table, toaster } from 'rsuite'
-import { RecordInterface } from 'src/models/record'
-import { RecordsService } from 'src/services/recordsService'
-import { useRouter } from 'next/router'
+import React, {FC, ReactElement, useContext, useEffect, useState} from 'react'
+import {Grid as RSGrid, Message, Table, toaster} from 'rsuite'
+import {RecordInterface} from 'src/models/record'
+import {RecordsService} from 'src/services/recordsService'
+import {useRouter} from 'next/router'
 import styled from 'styled-components'
 import VisibleIcon from '@rsuite/icons/Visible'
 import CloseIcon from '@rsuite/icons/Close'
-import { Loading } from './UI/Layout/Loading'
+import EditIcon from '@rsuite/icons/Edit';
+import {Loading} from './UI/Layout/Loading'
 import RecordsActions from './UI/RecordsActions'
 import DeleteRecordModal from './Modals/DeleteRecordModal'
-import { addRecordMessage } from './UI/message'
+import {addRecordMessage} from './UI/message'
+import {dateParser} from "../../utils/dateParser";
+import AppContext from "../contexts/AppContext";
+import RecordsSummary from './UI/RecordsSummary'
 
-const { Column, HeaderCell, Cell } = Table
+interface GridProps {
+    maxWidth?: string
+}
+
+const {Column, HeaderCell, Cell} = Table
 
 const Container = styled.div``
 
+const Grid = styled(RSGrid)<GridProps>`
+  width: fit-content;
+  height: auto;
+  overflow: scroll;
+
+  @media (max-width: ${(props): string => props?.maxWidth}) {
+    padding: 0;
+  }
+`
+
 const ActionContainer = styled.span`
-    cursor: pointer;
+  cursor: pointer;
 `
 
 const RecordsTable: FC = (): ReactElement => {
@@ -29,6 +47,8 @@ const RecordsTable: FC = (): ReactElement => {
     )
     const [showDeleteRecordModal, setShowDeleteRecordModal] = useState(false)
     const [deleteId, setDeleteId] = useState<number>(null)
+
+    const {maxResolutionQuery, windowDimensions} = useContext(AppContext)
 
     const onRowClick = (id: number, edit?: boolean): void => {
         if (edit) {
@@ -65,7 +85,7 @@ const RecordsTable: FC = (): ReactElement => {
     }, [])
 
     if (loading) {
-        return <Loading label="Fetching records..." />
+        return <Loading label="Fetching records..."/>
     }
 
     return (
@@ -75,46 +95,59 @@ const RecordsTable: FC = (): ReactElement => {
                 filteredRecords={filteredRecords}
                 setFilteredRecords={setFilteredRecords}
             />
-            <Grid style={{ width: 'fit-content' }}>
+            <RecordsSummary
+                records={records}
+            />
+            <Grid maxWidth={`${maxResolutionQuery}px`}>
                 <Table
+                    virtualized
+                    wordWrap
                     autoHeight
-                    width={605}
+                    width={windowDimensions.width < maxResolutionQuery ? windowDimensions.width : maxResolutionQuery}
                     data={filteredRecords}
                     onRowClick={(rowData): void => {
                         // eslint-disable-next-line no-underscore-dangle
                         onRowClick(rowData._id)
                     }}
                 >
-                    <Column width={150}>
+                    <Column fixed>
                         <HeaderCell>Title</HeaderCell>
-                        <Cell dataKey="title" />
+                        <Cell dataKey="title"/>
                     </Column>
 
                     <Column width={150}>
                         <HeaderCell>Detail</HeaderCell>
-                        <Cell dataKey="detail" />
+                        <Cell dataKey="detail"/>
                     </Column>
 
                     <Column width={100}>
                         <HeaderCell>Amount</HeaderCell>
-                        <Cell dataKey="amount" />
+                        <Cell dataKey="amount"/>
                     </Column>
 
-                    <Column width={135}>
+                    <Column width={60}>
+                        <HeaderCell>Type</HeaderCell>
+                        <Cell dataKey="type"/>
+                    </Column>
+
+                    <Column width={90}>
                         <HeaderCell>Date</HeaderCell>
                         <Cell dataKey="date">
                             {(rowData): ReactElement => {
                                 return (
-                                    rowData?.date?.slice(
-                                        0,
-                                        rowData?.date.indexOf(':') - 3
-                                    ) || ''
+                                    <>
+                                        {
+                                            rowData?.date && (
+                                                dateParser(rowData?.date)
+                                            )
+                                        }
+                                    </>
                                 )
                             }}
                         </Cell>
                     </Column>
 
-                    <Column width={70}>
+                    <Column fixed="right">
                         <HeaderCell>Actions</HeaderCell>
                         <Cell>
                             {(rowData): ReactElement => (
@@ -125,7 +158,17 @@ const RecordsTable: FC = (): ReactElement => {
                                         justifyContent: 'space-around',
                                     }}
                                 >
-                                    {' '}
+                                    <ActionContainer
+                                        onClick={(
+                                            e: React.MouseEvent
+                                        ): void => {
+                                            e.stopPropagation()
+                                            // eslint-disable-next-line no-underscore-dangle
+                                            onRowClick(rowData._id)
+                                        }}
+                                    >
+                                        <VisibleIcon/>
+                                    </ActionContainer>
                                     <ActionContainer
                                         onClick={(
                                             e: React.MouseEvent
@@ -135,7 +178,7 @@ const RecordsTable: FC = (): ReactElement => {
                                             onRowClick(rowData._id, true)
                                         }}
                                     >
-                                        <VisibleIcon />
+                                        <EditIcon/>
                                     </ActionContainer>
                                     <ActionContainer
                                         onClick={(
@@ -147,7 +190,7 @@ const RecordsTable: FC = (): ReactElement => {
                                             setShowDeleteRecordModal(true)
                                         }}
                                     >
-                                        <CloseIcon />
+                                        <CloseIcon/>
                                     </ActionContainer>
                                 </div>
                             )}

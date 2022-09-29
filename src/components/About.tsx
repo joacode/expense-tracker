@@ -5,7 +5,7 @@ import ItemDetail from './UI/ItemDetail'
 const About: FC = (): ReactElement => {
     return (
         <>
-            <Box>
+            <Box style={{ display: 'block' }}>
                 <ItemDetail bolder>
                     github:{' '}
                     <a href="https://github.com/joacode/financial-tool">

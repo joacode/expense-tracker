@@ -27,6 +27,7 @@ export default async function handler(req: NextApiRequest, res): Promise<void> {
                     title: req.body.title,
                     detail: req.body.detail,
                     amount: req.body.amount,
+                    type: req.body.type,
                     date: req.body.date,
                 }
             )

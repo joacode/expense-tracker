@@ -1,9 +1,10 @@
-import React, { FC, ReactElement, useEffect, useState } from 'react'
+import React, { FC, ReactElement, useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { DatePicker, Grid as StyledGrid } from 'rsuite'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import EditIcon from '@rsuite/icons/Edit'
+import { dateParser } from 'utils/dateParser'
 import { RecordsService } from '../services/recordsService'
 import { RecordInterface, RecordUpdateRequest } from '../models/record'
 import Button from './UI/Button'
@@ -13,36 +14,60 @@ import Title from './UI/Title'
 import ItemDetail from './UI/ItemDetail'
 import Box from './UI/Box'
 import InputItem from './UI/InputItem'
+import AppContext from '../contexts/AppContext'
 
-const Grid = styled(StyledGrid)`
+export interface MediaProps {
+    maxWidth?: string
+}
+
+const Grid = styled(StyledGrid)<MediaProps>`
+    width: 400px;
     height: 100%;
+
+    @media (max-width: ${(props): string => props?.maxWidth}) {
+        width: 100%;
+        margin: 0;
+    }
 `
 
-const Container = styled.div`
+export const ItemContainer = styled.div<MediaProps>`
     margin: 20px;
     padding: 20px;
     border-bottom: 0.5px solid #575a5b4d;
     justify-content: space-between;
     display: flex;
+
+    @media (max-width: ${(props): string => props?.maxWidth}) {
+        padding: 20px 0;
+        margin: 20px 0;
+        width: 100%;
+    }
 `
 
-const ButtonContainer = styled.div`
-    margin: 20px;
-    padding: 20px;
-    justify-content: space-between;
+const ButtonContainer = styled.div<MediaProps>`
+    padding: 10px 0 0 0;
+    margin: 10px 0 0 0;
+    justify-content: space-evenly;
     display: flex;
-    borderbottom: 'none';
-    //justifyContent: 'center',
+    border-bottom: none;
+
+    @media (max-width: ${(props): string => props?.maxWidth}) {
+        width: 100%;
+    }
 `
 
-interface Props {
+interface RecordDetailProps {
     edit?: boolean
 }
 
-const RecordDetail: FC<Props> = ({ edit = false }): ReactElement => {
+const RecordDetail: FC<RecordDetailProps> = ({
+    edit = false,
+}): ReactElement => {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [record, setRecord] = useState<RecordInterface>(null)
+
+    const { maxResolutionQuery } = useContext(AppContext)
 
     const handleEdit = (): void => {
         // @ts-ignore
@@ -74,6 +99,13 @@ const RecordDetail: FC<Props> = ({ edit = false }): ReactElement => {
         setRecord(prevState => ({
             ...prevState,
             amount: parseFloat(value),
+        }))
+    }
+
+    const typeChange = (value: string): void => {
+        setRecord(prevState => ({
+            ...prevState,
+            type: value,
         }))
     }
 
@@ -111,10 +143,10 @@ const RecordDetail: FC<Props> = ({ edit = false }): ReactElement => {
     }
 
     return (
-        <Box width="fit-content">
-            <Grid style={{ width: 400 }}>
+        <Box>
+            <Grid maxWidth={`${maxResolutionQuery}px`}>
                 <Title>
-                    <span>
+                    <>
                         {record?.title}
                         {!edit && (
                             <EditIcon
@@ -123,7 +155,7 @@ const RecordDetail: FC<Props> = ({ edit = false }): ReactElement => {
                                 onClick={handleEdit}
                             />
                         )}
-                    </span>
+                    </>
                 </Title>
                 {record && (
                     <>
@@ -145,7 +177,13 @@ const RecordDetail: FC<Props> = ({ edit = false }): ReactElement => {
                             defaultValue={record.amount}
                             edit={edit}
                         />
-                        <Container>
+                        <InputItem
+                            label="Type:"
+                            onChange={typeChange}
+                            defaultValue={record.type}
+                            edit={edit}
+                        />
+                        <ItemContainer maxWidth={`${maxResolutionQuery}px`}>
                             <ItemDetail bolder>Date:</ItemDetail>
                             {edit ? (
                                 <DatePicker
@@ -158,14 +196,11 @@ const RecordDetail: FC<Props> = ({ edit = false }): ReactElement => {
                                 />
                             ) : (
                                 <ItemDetail>
-                                    {record?.date?.slice(
-                                        0,
-                                        record?.date?.indexOf('T')
-                                    )}
+                                    {dateParser(record.date)}
                                 </ItemDetail>
                             )}
-                        </Container>
-                        <ButtonContainer>
+                        </ItemContainer>
+                        <ButtonContainer maxWidth={`${maxResolutionQuery}px`}>
                             {edit && (
                                 <Button appearance="ghost" onClick={onCancel}>
                                     Cancel

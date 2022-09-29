@@ -1,12 +1,23 @@
 import React, { CSSProperties, FC, ReactElement } from 'react'
 
 interface Props {
-    children: ReactElement
+    children: ReactElement | ReactElement[]
     style?: CSSProperties
 }
 
 const Title: FC<Props> = ({ style, children }): ReactElement => {
-    return <h1 style={{ textAlign: 'center', ...style }}>{children}</h1>
+    return (
+        <h1
+            style={{
+                textAlign: 'center',
+                width: 'auto',
+                wordWrap: 'break-word',
+                ...style,
+            }}
+        >
+            {children}
+        </h1>
+    )
 }
 
 export default Title
